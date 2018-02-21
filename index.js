@@ -6,18 +6,19 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 app.get('/api', function (req, res) {
-  res.sendFile('./views/homepage.html', {root: __dirname});
+  res.sendFile('./homepage.html', {root: __dirname});
 });
 
 app.get('/books', function (req, res) {
-  res.sendFile('./views/books.html', {root: __dirname});
+  res.sendFile('./books.html', {root: __dirname});
 });
 
 app.get('/login', function (req, res) {
-  res.sendFile('./views/login.html', {root: __dirname});
+  res.sendFile('./login.html', {root: __dirname});
 });
 //connect to MongoDB
-mongoose.connect('mongodb://localhost/127.0.0.1:27017]/api');
+// mongodb://azkmetat:Poznai12@cluster0-shard-00-00-jpice.mongodb.net:27017,cluster0-shard-00-01-jpice.mongodb.net:27017,cluster0-shard-00-02-jpice.mongodb.net:27017/booktest?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin
+mongoose.connect('mongodb://azkmetat:Poznai12@cluster0-shard-00-00-jpice.mongodb.net:27017,cluster0-shard-00-01-jpice.mongodb.net:27017,cluster0-shard-00-02-jpice.mongodb.net:27017/booktest?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
 var db = mongoose.connection;
 
 //handle mongo error
@@ -45,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + './views/login.html'));
 
 // include routes
-var routes = require('./routes/router');
+var routes = require('./router');
 app.use('/', routes);
 
 // catch 404 and forward to error handler
